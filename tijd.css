@@ -1,0 +1,16 @@
+/* morning */
+body{
+    background-image: url(morning.png);
+}
+/* afternoon */
+body{
+    background-image: url(afternoon.png);
+}
+/* evening */
+body{
+    background-image: url(evening.png);
+}
+/* night */
+body{
+    background-image: url(night.png);
+}
