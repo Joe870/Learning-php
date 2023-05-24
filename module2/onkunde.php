@@ -4,23 +4,26 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="madlibs.css">
 </head>
 <body>
-
-    <ul>
-        <li>er heerst paniek</li>
-        <li>onkunde</li>
-    </ul>
+    <nav>
+        <ul>
+            <li><a href="paniek.php" id="form">paniek</a></li>
+            <li><a href="onkunde.php" id="form">onkunde</a></li>
+        </ul>
+    </nav>
     <?php
-        $vaardigheid = $persoonsnaam = $object = $goedeeigenschap = $slechteeigenschap = $gebeurtenis "";
+        $vaardigheid = $persoonsnaam = $object = $goedeeigenschap = $slechteeigenschap = $gebeurtenis = "";
 
         if ($_SERVER["REQUEST_METHOD"] == "POST"){
-            $vaardigheid = test_input($_POST["vaardigheid"]);
-            $persoonsnaam = test_input($_POST["persoonsnaam"]);
-            $object = test_input($_POST["object"]);
-            $goedeigenschap = test_input($_POST["goedeeigenschap"]);
-            $slechteeigenschap = test_input($_POST["slechteeigenschap"]);
-            $gebeurtenis = test_input($_POST["gebeurtenis"]);
+            $vaardigheid = $_POST["vaardigheid"];
+            $persoonsnaam = $_POST["persoonsnaam"];
+            $object = $_POST["object"];
+            $getal = $_POST["getal"];
+            $goedeigenschap = $_POST["goedeeigenschap"];
+            $slechteeigenschap = $_POST["slechteeigenschap"];
+            $gebeurtenis = $_POST["gebeurtenis"];
         }
 
         function test_input($data) {
@@ -31,7 +34,7 @@
         }
     ?>
 
-    <form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>">
+    <form method="post" action="onkunde2.php">
     Wat wou je graag willen kunnen? <input type="text" name="vaardigheid">
     <br><br>
     Met welke persoon kun je goed opschieten? <input type="text" name="persoonsnaam">
