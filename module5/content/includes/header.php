@@ -3,8 +3,15 @@ Gebruik hier tenminste een header afbeelding en een menu
 Zorg dat je in het menu bij elk item een url parameter zet
 om te bepalen welke inhoud er ingeladen moet worden in je html
 -->
-<?php 
-echo '<a href="pages/onderwerp1.php?id=0">video games</a> - 
-<a href="pages/onderwerp2.php?id=1">super hero movies</a> -
-<a href="pages/onderwerp3.php?id=2">fantasy books</a>';
-?>
+<div class="header">
+    <div class="navbar">
+        <nav> 
+            <ul>
+                <li><a href="index.php">Home</a></li>
+                <li><a href="index.php?onderwerp=1">video games</a></li>
+                <li><a href="index.php?onderwerp=2">superhelden films</a></li>
+                <li><a href="index.php?onderwerp=3">fantasy boeken</a></li>
+            </ul>
+        </nav>
+    </div>
+</div>

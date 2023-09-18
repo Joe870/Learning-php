@@ -7,65 +7,64 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-
-	<!-- laad hier via php je header in (vanuit je includes map) -->
+<!-- laad hier via php je header in (vanuit je includes map) -->
+<div class="container">
 <?php 
 include 'includes/header.php';
 
-//<!-- Haal hier uit de URL welke pagina uit het menu is opgevraagd. Gebruik deze om de content uit de database te halen. -->
+
 $servername = "localhost";
 $username = "root";
 $password = "";
 $dbname = "databank_php";
 
-// for($x = 0; $x<=2; $x++){
-// 	$id = $x;
-// 	$query = "SELECT * FROM name WHERE id = $id";
-// }
+// create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
 
-try {
-	$conn = new PDO("mysql:host=$servername;dbname=databank_php", $username, $password);
-	$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-	echo "Connected successfully";
-} catch(PDOException $e){
-	echo "Connection failed: " . $e->getMessage();
+// check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error); 
 }
 
-$id = 1;
-echo $id;
-$query = "SELECT * FROM `onderwerpen` WHERE id = :id";
-$stmt = $conn ->prepare($query);
-$stmt->bindParam(":id", $id);
-try{$stmt->execute();
-} catch (PDOException $e) {
-	echo "fout bij het uitvoeren van een query". $e->getMessage();
-}
+// check if a URL parameter exists
+if(isset($_GET['onderwerp'])) {
+    // URL parameter exists, retrieve the value 
+    $id = $_GET['onderwerp']; 
 
-if ($stmt->execute()) {
-    $result = $stmt->fetch(PDO::FETCH_ASSOC);
-    if ($result) {
-        $naam = $result['naam'];
-        echo "Naam: " . $naam;
+    // sanitize and validate the input 
+    $id = mysqli_real_escape_string($conn, $id);
+
+    // fetch data from MySQL based on the URL parameter
+    $sql = "SELECT * From onderwerpen WHERE id = '$id'"; 
+    $result = $conn->query($sql);
+    
+    // check if the query was successful 
+    if ($result && $result-> num_rows > 0) {
+        while ($row = $result->fetch_assoc()){
+            // access the data using $row['column_name']
+            echo "
+                <div class='wrapper'>
+                    <img src='{$row['image']}' alt=Image description>
+                    <div class='text'>
+                        <h1>{$row['name']}</h1>
+                        <p>{$row['description']}</p>
+                    </div>
+                </div>";
+        }
     } else {
-        echo "Geen resultaten gevonden.";
+        echo "No data found.";
     }
 } else {
-    echo "Fout bij het uitvoeren van de query.";
+    // No URL parameter, handle homepage logic here
+    echo "Welcome to the homepage!";
 }
 
-// $conn = null;
-// if(isset($_GET['subject'])){
-//   $onderwerp = $_GET['subject'];
-// }
-//<!-- Laat hier de content die je op hebt gehaald uit de database zien op de pagina. -->
+?>
+</div>
 
-//<!-- laad hier via php je footer in (vanuit je includes map)-->
-echo"<p></p>";
-require 'includes/footer.php';
-echo " $naam ";
-echo "$datum";
-
-
+<?php 
+// laad hier via php je footer 
+include "includes/footer.php";
 ?>
 </body>
-</html>
+</html> 
