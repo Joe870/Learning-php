@@ -42,14 +42,23 @@ if(isset($_GET['onderwerp'])) {
     if ($result && $result-> num_rows > 0) {
         while ($row = $result->fetch_assoc()){
             // access the data using $row['column_name']
-            echo "
-                <div class='wrapper'>
-                    <img src='{$row['image']}' alt=Image description>
-                    <div class='text'>
-                        <h1>{$row['name']}</h1>
-                        <p>{$row['description']}</p>
-                    </div>
-                </div>";
+            $imageData = $row['image'];
+            $imageType = $row['Type']; 
+            echo "<div class='wrapper'>";
+            echo "<img src='data:{$imageType};base64," . base64_encode($imageData) . "' alt='image description'>";
+            echo "<div class='text'>";
+            echo "<h1>{$row['name']}</h1>";
+            echo "<p>{$row['description']}</p>";
+            echo "</div>";
+            echo "</div>";
+
+                // "<div class='wrapper'>
+                //     <img src='{$row['image']}' alt=Image description>
+                //     <div class='text'>
+                //         <h1>{$row['name']}</h1>
+                //         <p>{$row['description']}</p>
+                //     </div>
+                // </div>";
         }
     } else {
         echo "No data found.";
