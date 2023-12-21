@@ -41,7 +41,7 @@
                 $defense = $row['defense'];
                 $link = "pagina2.php?id=$id";
                 echo "<div class='wrapper'>";
-                echo "<img src='images/$imagetype' alt='image description'>";
+                echo "<img src=\"images/$imagetype\" alt=\"image description\">";
                 echo "<div class='text'>";
                 echo "<p id='naam'>naam: {$row['name']}</p>";
                 echo "<p>health: {$row['health']}</p>";

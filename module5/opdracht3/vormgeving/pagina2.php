@@ -44,7 +44,7 @@
             $naam = $row['name'];
             echo "<div class='wrapper'>";
             echo "<p id='naam'>{$row['name']}</p>";
-            echo "<img src='images/$imagetype' id='image' alt='image description'>";
+            echo "<img src=\"images/$imagetype\" id=\"image\" alt=\"image description\">";
             echo "<p id=alinea>$text</p>";
             echo "<div class='text' style='background-color: $color;'>";
             echo "<p>weapon:$weapon</p>";
